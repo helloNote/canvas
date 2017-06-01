@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <style>
+        body{
+            padding: 0;
+            margin:0 auto;
+        }
+        .box{
+            border: 5px solid #69d2ca;
+            width:500px ;
+            height:500px;
+            margin:0 auto;
+        }
+        #can{
+            background: #f3fff6;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <canvas id="can" width="500px" height="500px"></canvas>
+    <p style="padding-left: 150px">请使用鼠标点击开始写字</p>
+</div>
+<script>
+
+        var a=document.getElementById("can");
+        var ctx= a.getContext("2d");
+        ctx.lineWidth=5;
+//第一种方法
+/*        a.onmousedown=function(){
+                var x = event.offsetX;
+                var y = event.offsetY;
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+
+            a.onmousemove=function(){
+                var x1 = event.offsetX;
+                var y1 = event.offsetY;
+                ctx.lineTo(x1, y1)
+                ctx.stroke()
+            }
+        }
+        a.onmouseup=function(){
+            a.onmousemove=null;//消除他的鼠标移动事件
+        }*/
+//第二种调试方法
+        var num;//通过变量的true和false来控制；
+        a.addEventListener("mousedown",fun)
+                function fun() {
+                    num=true;
+                var x = event.offsetX;
+                var y = event.offsetY;
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+            }
+        a.addEventListener("mousemove", function () {
+            if(num==true){
+                var x1 = event.offsetX;
+                var y1 = event.offsetY;
+                ctx.lineTo(x1, y1)
+                ctx.stroke()
+            }
+
+        });
+
+            a.addEventListener("mouseup",function(){
+                num=false;
+            })
+
+
+</script>
+
+</body>
+</html>
